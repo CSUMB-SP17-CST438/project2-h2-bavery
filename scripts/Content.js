@@ -8,25 +8,43 @@ export class Content extends React.Component {
         super(props);
         this.state = {
             'numbers': []
-        };
+            };
     }
 
     componentDidMount() {
-        Socket.on('all_numbers', (data) => {
+        Socket.on('all numbers', (data) => {
             this.setState({
-                'numbers': data['numbers']
+                'numbers': data['numbers'],
             });
         })
     }
 
     render() {
         let numbers = this.state.numbers.map(
-            (n, index) => <li key={index}>{n}</li>
+            (n, index) => <li key= {index}>
+                <img src= {n.picture} />
+                {n.name}: {n.number}
+            </li>
+            
         );
         return (
             <div>
-                <h1>Random numbers so far!</h1>
+                <h1>Random Chat!</h1>
+                <div
+                    className="fb-login-button" 
+                    data-max-rows="1" 
+                    data-size="medium"
+                    data-show-faces="false"
+                    data-auto-logout-link="true">
+                </div>
+                <div
+                    className="g-signin2"
+                    data-theme="dark">
+                </div>
+                <div className="chatBox">
                 <ul>{numbers}</ul>
+                </div>
+                <h1 className="heading">Random numbers so far!</h1>
                 <Button />
             </div>
         );

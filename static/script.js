@@ -13144,7 +13144,10 @@ var Content = exports.Content = function (_React$Component) {
                 return React.createElement(
                     'li',
                     { key: index },
-                    n
+                    React.createElement('img', { src: n.picture }),
+                    n.name,
+                    ': ',
+                    n.number
                 );
             });
             return React.createElement(
@@ -13153,12 +13156,30 @@ var Content = exports.Content = function (_React$Component) {
                 React.createElement(
                     'h1',
                     null,
-                    'Random numbers so far!'
+                    'Random Chat!'
+                ),
+                React.createElement('div', {
+                    className: 'fb-login-button',
+                    'data-max-rows': '1',
+                    'data-size': 'medium',
+                    'data-show-faces': 'false',
+                    'data-auto-logout-link': 'true' }),
+                React.createElement('div', {
+                    className: 'g-signin2',
+                    'data-theme': 'dark' }),
+                React.createElement(
+                    'div',
+                    { className: 'chatBox' },
+                    React.createElement(
+                        'ul',
+                        null,
+                        numbers
+                    )
                 ),
                 React.createElement(
-                    'ul',
-                    null,
-                    numbers
+                    'h1',
+                    { className: 'heading' },
+                    'Random numbers so far!'
                 ),
                 React.createElement(_Button.Button, null)
             );
@@ -13300,8 +13321,25 @@ var Button = exports.Button = function (_React$Component) {
 
             var random = Math.floor(Math.random() * 100);
             console.log('Generated a random number: ', random);
-            _Socket.Socket.emit('new number', {
-                'number': random
+            FB.getLoginStatus(function (response) {
+                if (response.status == 'connected') {
+                    _Socket.Socket.emit('new number', {
+                        'google_user_token': '',
+                        'facebook_user_token': response.authResponse.accessToken,
+                        'number': random
+                    });
+                } else {
+
+                    var auth = gapi.auth2.getAuthInstance();
+                    var user = auth.currentUser.get();
+                    if (user.isSignedIn()) {
+                        _Socket.Socket.emit('new number', {
+                            'google_user_token': user.getAuthResponse().id_token,
+                            'facebook_user_token': '',
+                            'number': random
+                        });
+                    }
+                }
             });
             console.log('Sent up the random number to server!');
         }
