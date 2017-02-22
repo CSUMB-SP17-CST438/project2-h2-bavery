@@ -7,7 +7,8 @@ export class Content extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'numbers': []
+            'numbers': [],
+            'users': []
             };
     }
 
@@ -17,6 +18,11 @@ export class Content extends React.Component {
                 'numbers': data['numbers'],
             });
         })
+        Socket.on('user list', (data) => {
+            this.setState({
+                'users': data['users'],
+            })
+        })
     }
 
     render() {
@@ -25,7 +31,11 @@ export class Content extends React.Component {
                 <img src= {n.picture} />
                 {n.name}: {n.message}
             </li>
-            
+        );
+        let users = this.state.users.map(
+            (i, index) => <li key= {index}>
+                {i.user}
+            </li>
         );
         return (
             <div>
@@ -45,6 +55,7 @@ export class Content extends React.Component {
                     <div className="userList">
                         <h4>Users:</h4>
                         <div className="list">
+                            <ul>{users}</ul>
                         </div>
                     </div>
                     <div className="inputBox">

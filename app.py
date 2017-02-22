@@ -25,6 +25,7 @@ def on_disconnect():
     print 'Someone disconnected!'
 
 all_mah_numbers = []
+user_list = []
 
 @socketio.on('new number')
 def on_new_number(data):
@@ -38,6 +39,9 @@ def on_new_number(data):
             'picture': json['picture']['data']['url'],
             'message':data['message'],
         })
+        if json['name'] not in user_list:
+            user_list.append({'user': json['name']})
+            
     elif (data['google_user_token'] != ''):
         response= requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='+data['google_user_token'])
         json= response.json()
@@ -48,9 +52,15 @@ def on_new_number(data):
             'picture': json['picture'],
             'message':data['message'],
         })
+        if json['name'] not in user_list:
+            user_list.append({'user': json['name']})
    
     socketio.emit('all numbers', {
         'numbers': all_mah_numbers
+    })
+    
+    socketio.emit('user list', {
+        'users': user_list
     })
 
 socketio.run(

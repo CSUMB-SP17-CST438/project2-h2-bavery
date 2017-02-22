@@ -13121,7 +13121,8 @@ var Content = exports.Content = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this, props));
 
         _this.state = {
-            'numbers': []
+            'numbers': [],
+            'users': []
         };
         return _this;
     }
@@ -13136,6 +13137,11 @@ var Content = exports.Content = function (_React$Component) {
                     'numbers': data['numbers']
                 });
             });
+            _Socket.Socket.on('user list', function (data) {
+                _this2.setState({
+                    'users': data['users']
+                });
+            });
         }
     }, {
         key: 'render',
@@ -13148,6 +13154,13 @@ var Content = exports.Content = function (_React$Component) {
                     n.name,
                     ': ',
                     n.message
+                );
+            });
+            var users = this.state.users.map(function (i, index) {
+                return React.createElement(
+                    'li',
+                    { key: index },
+                    i.user
                 );
             });
             return React.createElement(
@@ -13178,7 +13191,15 @@ var Content = exports.Content = function (_React$Component) {
                             null,
                             'Users:'
                         ),
-                        React.createElement('div', { className: 'list' })
+                        React.createElement(
+                            'div',
+                            { className: 'list' },
+                            React.createElement(
+                                'ul',
+                                null,
+                                users
+                            )
+                        )
                     ),
                     React.createElement(
                         'div',
