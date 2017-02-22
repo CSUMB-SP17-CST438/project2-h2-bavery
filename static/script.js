@@ -13147,7 +13147,9 @@ var Content = exports.Content = function (_React$Component) {
                     React.createElement('img', { src: n.picture }),
                     n.name,
                     ': ',
-                    n.number
+                    n.number,
+                    ': ',
+                    n.message
                 );
             });
             return React.createElement(
@@ -13155,7 +13157,7 @@ var Content = exports.Content = function (_React$Component) {
                 null,
                 React.createElement(
                     'h1',
-                    { className: 'heading', align: 'center' },
+                    { className: 'heading' },
                     'Random Chat!'
                 ),
                 React.createElement('div', {
@@ -13319,13 +13321,15 @@ var Button = exports.Button = function (_React$Component) {
             event.preventDefault();
 
             var random = Math.floor(Math.random() * 100);
+            var message = document.getElementById("message").value;
             console.log('Generated a random number: ', random);
             FB.getLoginStatus(function (response) {
                 if (response.status == 'connected') {
                     _Socket.Socket.emit('new number', {
                         'google_user_token': '',
                         'facebook_user_token': response.authResponse.accessToken,
-                        'number': random
+                        'number': random,
+                        'message': message
                     });
                 } else {
 
@@ -13335,7 +13339,8 @@ var Button = exports.Button = function (_React$Component) {
                         _Socket.Socket.emit('new number', {
                             'google_user_token': user.getAuthResponse().id_token,
                             'facebook_user_token': '',
-                            'number': random
+                            'number': random,
+                            'message': message
                         });
                     }
                 }
@@ -13351,7 +13356,7 @@ var Button = exports.Button = function (_React$Component) {
                 React.createElement(
                     'span',
                     null,
-                    React.createElement('input', { type: 'text', name: 'message' }),
+                    React.createElement('input', { type: 'text', id: 'message' }),
                     React.createElement(
                         'button',
                         null,

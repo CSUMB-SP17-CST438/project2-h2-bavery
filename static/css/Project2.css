@@ -24,6 +24,8 @@ html {
     padding: 15px;
     border-radius: 25px;
     flex: 1 1 auto;
+    overflow-y: scroll;
+    height: 35%;
 }
 
 .input {

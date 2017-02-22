@@ -32,6 +32,7 @@ def on_new_number(data):
             'name': json['name'],
             'picture': json['picture']['data']['url'],
             'number':data['number'],
+            'message':data['message'],
         })
     elif (data['google_user_token'] != ''):
         response= requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='+data['google_user_token'])
@@ -42,6 +43,7 @@ def on_new_number(data):
             'name': json['name'],
             'picture': json['picture'],
             'number':data['number'],
+            'message':data['message'],
         })
    
     socketio.emit('all numbers', {

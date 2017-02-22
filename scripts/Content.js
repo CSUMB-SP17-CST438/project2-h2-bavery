@@ -23,13 +23,13 @@ export class Content extends React.Component {
         let numbers = this.state.numbers.map(
             (n, index) => <li key= {index}>
                 <img src= {n.picture} />
-                {n.name}: {n.number}
+                {n.name}: {n.number}: {n.message}
             </li>
             
         );
         return (
             <div>
-                <h1 className="heading" align="center">Random Chat!</h1>
+                <h1 className="heading">Random Chat!</h1>
                 <div
                     className="fb-login-button" 
                     data-max-rows="1" 
