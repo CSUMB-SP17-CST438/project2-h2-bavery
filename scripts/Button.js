@@ -6,7 +6,6 @@ export class Button extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        let random = Math.floor(Math.random() * 100);
         let message = document.getElementById("message").value;
         console.log('Generated a random number: ', random);
         FB.getLoginStatus((response) => {
@@ -15,7 +14,6 @@ export class Button extends React.Component {
                     'google_user_token': '',
                     'facebook_user_token':
                         response.authResponse.accessToken,
-                    'number': random,
                     'message': message,
                 });
             
@@ -28,7 +26,6 @@ export class Button extends React.Component {
                         'google_user_token':
                             user.getAuthResponse().id_token,
                         'facebook_user_token': '',
-                        'number':random,
                         'message':message,
                     });
                 }

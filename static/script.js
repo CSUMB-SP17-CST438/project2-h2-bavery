@@ -13147,8 +13147,6 @@ var Content = exports.Content = function (_React$Component) {
                     React.createElement('img', { src: n.picture }),
                     n.name,
                     ': ',
-                    n.number,
-                    ': ',
                     n.message
                 );
             });
@@ -13320,7 +13318,6 @@ var Button = exports.Button = function (_React$Component) {
         value: function handleSubmit(event) {
             event.preventDefault();
 
-            var random = Math.floor(Math.random() * 100);
             var message = document.getElementById("message").value;
             console.log('Generated a random number: ', random);
             FB.getLoginStatus(function (response) {
@@ -13328,7 +13325,6 @@ var Button = exports.Button = function (_React$Component) {
                     _Socket.Socket.emit('new number', {
                         'google_user_token': '',
                         'facebook_user_token': response.authResponse.accessToken,
-                        'number': random,
                         'message': message
                     });
                 } else {
@@ -13339,7 +13335,6 @@ var Button = exports.Button = function (_React$Component) {
                         _Socket.Socket.emit('new number', {
                             'google_user_token': user.getAuthResponse().id_token,
                             'facebook_user_token': '',
-                            'number': random,
                             'message': message
                         });
                     }

@@ -31,7 +31,6 @@ def on_new_number(data):
         all_mah_numbers.append({
             'name': json['name'],
             'picture': json['picture']['data']['url'],
-            'number':data['number'],
             'message':data['message'],
         })
     elif (data['google_user_token'] != ''):
@@ -42,7 +41,6 @@ def on_new_number(data):
         all_mah_numbers.append({
             'name': json['name'],
             'picture': json['picture'],
-            'number':data['number'],
             'message':data['message'],
         })
    
