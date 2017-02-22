@@ -39,7 +39,11 @@ def on_new_number(data):
             'picture': json['picture']['data']['url'],
             'message':data['message'],
         })
-        if json['name'] not in user_list:
+        containsFlag = 0
+        for x in user_list:
+            if json['name'] == x['user']:
+                containsFlag = 1
+        if containsFlag == 0:
             user_list.append({'user': json['name']})
             
     elif (data['google_user_token'] != ''):
@@ -52,8 +56,13 @@ def on_new_number(data):
             'picture': json['picture'],
             'message':data['message'],
         })
-        if json['name'] not in user_list:
+        containsFlag = 0
+        for x in user_list:
+            if json['name'] == x['user']:
+                containsFlag = 1
+        if containsFlag == 0:
             user_list.append({'user': json['name']})
+            
    
     socketio.emit('all numbers', {
         'numbers': all_mah_numbers
