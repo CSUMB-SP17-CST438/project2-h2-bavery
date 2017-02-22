@@ -41,11 +41,20 @@ export class Content extends React.Component {
                     className="g-signin2"
                     data-theme="dark">
                 </div>
-                <div className="chatBox">
-                <ul>{numbers}</ul>
-                </div>
-                <div className="input">
-                <Button />
+                <div className="container">
+                    <div className="userList">
+                        <h4>Users:</h4>
+                        <div className="list">
+                        </div>
+                    </div>
+                    <div className="inputBox">
+                        <div className="chatBox">
+                            <ul>{numbers}</ul>
+                        </div>
+                        <div className="input">
+                            <Button />
+                        </div>
+                    </div>
                 </div>
             </div>
         );

@@ -13169,17 +13169,35 @@ var Content = exports.Content = function (_React$Component) {
                     'data-theme': 'dark' }),
                 React.createElement(
                     'div',
-                    { className: 'chatBox' },
+                    { className: 'container' },
                     React.createElement(
-                        'ul',
-                        null,
-                        numbers
+                        'div',
+                        { className: 'userList' },
+                        React.createElement(
+                            'h4',
+                            null,
+                            'Users:'
+                        ),
+                        React.createElement('div', { className: 'list' })
+                    ),
+                    React.createElement(
+                        'div',
+                        { className: 'inputBox' },
+                        React.createElement(
+                            'div',
+                            { className: 'chatBox' },
+                            React.createElement(
+                                'ul',
+                                null,
+                                numbers
+                            )
+                        ),
+                        React.createElement(
+                            'div',
+                            { className: 'input' },
+                            React.createElement(_Button.Button, null)
+                        )
                     )
-                ),
-                React.createElement(
-                    'div',
-                    { className: 'input' },
-                    React.createElement(_Button.Button, null)
                 )
             );
         }

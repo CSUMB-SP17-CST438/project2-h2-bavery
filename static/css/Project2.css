@@ -24,7 +24,6 @@ html {
     margin: 50px;
     padding: 15px;
     border-radius: 25px;
-    flex: 1 1 auto;
     overflow-y: scroll;
     height: 35%;
     font-family: Helvetica, sans-serif;
@@ -38,7 +37,6 @@ html {
     margin: 50px;
     padding: 15px;
     border-radius: 5px;
-    flex: 1 1 auto;
     display: block;
 }
 
@@ -50,4 +48,34 @@ input {
 span {
     display: block;
     overflow: hidden;
+}
+
+.userList {
+    background-color: gray;
+    opacity: 0.5;
+    margin: 50px;
+    padding: 5px;
+    border-radius: 10px;
+    height: 50%;
+    font-family: Helvetica, sans-serif;
+    color: black;
+    font-weight: bold;
+    order: 1;
+    flex-grow: 1;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.inputBox {
+    order:2;
+    flex-grow: 2;
+}
+
+.list {
+     overflow-y: scroll;
+     width: 100%;
+     flex-grow:1;
 }

@@ -14,6 +14,11 @@ def hello():
 @socketio.on('connect')
 def on_connect():
     print 'Someone connected!'
+    
+    socketio.emit('all numbers', {
+        'numbers': all_mah_numbers
+    })
+    
 
 @socketio.on('disconnect')
 def on_disconnect():
