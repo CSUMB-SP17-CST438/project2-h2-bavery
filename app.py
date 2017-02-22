@@ -6,9 +6,10 @@ import requests
 app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
 
+
 @app.route('/')
 def hello():
-    return flask.render_template('index.html')
+    return flask.render_template('index.html', facebook_id = os.environ['facebook_app_id'], google_id = os.environ['google_client_id'])
 
 @socketio.on('connect')
 def on_connect():

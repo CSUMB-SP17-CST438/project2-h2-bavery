@@ -5,7 +5,7 @@
             content= "profile email"/>
         <meta 
             name="google-signin-client_id" 
-            content= "{{google_id}}">
+            content= "{{ google_id }}">
         <script src="https://apis.google.com/js/platform.js" async defer>
         </script>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/Project2.css')}}"/>
@@ -15,7 +15,7 @@
         <script>
         window.fbAsyncInit = function() {
         FB.init({
-        appId      : '{{facebook_id}}',
+        appId      : '{{ facebook_id  }}',
         cookie     : true,
         xfbml      : true,
         version    : 'v2.8'

@@ -29,7 +29,7 @@ export class Content extends React.Component {
         );
         return (
             <div>
-                <h1>Random Chat!</h1>
+                <h1 className="heading" align="center">Random Chat!</h1>
                 <div
                     className="fb-login-button" 
                     data-max-rows="1" 
@@ -44,8 +44,9 @@ export class Content extends React.Component {
                 <div className="chatBox">
                 <ul>{numbers}</ul>
                 </div>
-                <h1 className="heading">Random numbers so far!</h1>
+                <div className="input">
                 <Button />
+                </div>
             </div>
         );
     }

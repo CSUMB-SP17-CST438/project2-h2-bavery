@@ -13155,7 +13155,7 @@ var Content = exports.Content = function (_React$Component) {
                 null,
                 React.createElement(
                     'h1',
-                    null,
+                    { className: 'heading', align: 'center' },
                     'Random Chat!'
                 ),
                 React.createElement('div', {
@@ -13177,11 +13177,10 @@ var Content = exports.Content = function (_React$Component) {
                     )
                 ),
                 React.createElement(
-                    'h1',
-                    { className: 'heading' },
-                    'Random numbers so far!'
-                ),
-                React.createElement(_Button.Button, null)
+                    'div',
+                    { className: 'input' },
+                    React.createElement(_Button.Button, null)
+                )
             );
         }
     }]);
@@ -13349,10 +13348,11 @@ var Button = exports.Button = function (_React$Component) {
             return React.createElement(
                 'form',
                 { onSubmit: this.handleSubmit },
+                React.createElement('input', { type: 'text', name: 'message' }),
                 React.createElement(
                     'button',
                     null,
-                    'Send up a random number!'
+                    'Post'
                 )
             );
         }
