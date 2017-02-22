@@ -37,7 +37,9 @@ export class Button extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <input type="text" name="message" /><button>Post</button>
+                <span>
+                    <input type="text" name="message" /><button>Post</button>
+                </span>
             </form>
         );
     }

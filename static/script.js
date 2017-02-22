@@ -13348,11 +13348,15 @@ var Button = exports.Button = function (_React$Component) {
             return React.createElement(
                 'form',
                 { onSubmit: this.handleSubmit },
-                React.createElement('input', { type: 'text', name: 'message' }),
                 React.createElement(
-                    'button',
+                    'span',
                     null,
-                    'Post'
+                    React.createElement('input', { type: 'text', name: 'message' }),
+                    React.createElement(
+                        'button',
+                        null,
+                        'Post'
+                    )
                 )
             );
         }
