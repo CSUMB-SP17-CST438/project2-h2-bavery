@@ -34,7 +34,7 @@ export class Content extends React.Component {
         );
         let users = this.state.users.map(
             (i, index) => <li key= {index}>
-                {i.user}: {i.size}
+                {i.user}: {i.length}
             </li>
         );
         return (
