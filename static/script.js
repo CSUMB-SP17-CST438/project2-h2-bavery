@@ -13160,7 +13160,9 @@ var Content = exports.Content = function (_React$Component) {
                 return React.createElement(
                     'li',
                     { key: index },
-                    i.user
+                    i.user,
+                    ': ',
+                    i.size
                 );
             });
             return React.createElement(
