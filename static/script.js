@@ -13319,7 +13319,7 @@ var Button = exports.Button = function (_React$Component) {
             event.preventDefault();
 
             var message = document.getElementById("message").value;
-            console.log('Generated a random number: ', random);
+            console.log('Post button clicked');
             FB.getLoginStatus(function (response) {
                 if (response.status == 'connected') {
                     _Socket.Socket.emit('new number', {

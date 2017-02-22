@@ -7,7 +7,7 @@ export class Button extends React.Component {
         event.preventDefault();
 
         let message = document.getElementById("message").value;
-        console.log('Generated a random number: ', random);
+        console.log('Post button clicked');
         FB.getLoginStatus((response) => {
             if (response.status == 'connected') {
                 Socket.emit('new number', {
