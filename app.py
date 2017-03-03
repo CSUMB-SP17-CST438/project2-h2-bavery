@@ -2,6 +2,8 @@ import os
 import flask
 import flask_socketio
 import requests
+import flask_sqlalchemy
+import models
 
 app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
@@ -9,7 +11,7 @@ socketio = flask_socketio.SocketIO(app)
 
 @app.route('/')
 def hello():
-    return flask.render_template('index.html', facebook_id = os.environ['facebook_app_id'], google_id = os.environ['google_client_id'])
+    return flask.render_template('index.html')
 
 @socketio.on('connect')
 def on_connect():
@@ -73,10 +75,11 @@ def on_new_number(data):
         'users': user_list
     })
 
-socketio.run(
-    app,
-    host=os.getenv('IP', '0.0.0.0'),
-    port=int(os.getenv('PORT', 8080)),
-    debug=True
-)
+if __name__ == '__main__':
+    socketio.run(
+        app,
+        host=os.getenv('IP', '0.0.0.0'),
+        port=int(os.getenv('PORT', 8080)),
+        debug=True
+    )
 
