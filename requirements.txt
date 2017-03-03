@@ -1,6 +1,5 @@
 Flask
 flask-socketio
 requests
-postgresql
 psycopg2
 Flask-SQLAlchemy
