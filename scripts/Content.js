@@ -8,7 +8,8 @@ export class Content extends React.Component {
         super(props);
         this.state = {
             'numbers': [],
-            'users': []
+            'users': [],
+            'user_count': 0
             };
     }
 
@@ -21,6 +22,7 @@ export class Content extends React.Component {
         Socket.on('user list', (data) => {
             this.setState({
                 'users': data['users'],
+                'user_count': data['count'],
             })
         })
        
@@ -35,7 +37,7 @@ export class Content extends React.Component {
         );
         let users = this.state.users.map(
             (i, index) => <li key= {index}>
-                {i.user}: i.length
+                {i.user}
             </li>
         );
         return (
@@ -54,7 +56,7 @@ export class Content extends React.Component {
                 </div>
                 <div className="container">
                     <div className="userList">
-                        <h4>Users:</h4>
+                        <h4>Users:  {this.state.user_count}</h4>
                         <div className="list">
                             <ul>{users}</ul>
                         </div>
