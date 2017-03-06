@@ -23,6 +23,7 @@ export class Content extends React.Component {
                 'users': data['users'],
             })
         })
+       
     }
 
     render() {
@@ -34,7 +35,7 @@ export class Content extends React.Component {
         );
         let users = this.state.users.map(
             (i, index) => <li key= {index}>
-                {i.user}: {i.length}
+                {i.user}: i.length
             </li>
         );
         return (
