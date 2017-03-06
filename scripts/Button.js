@@ -31,7 +31,7 @@ export class Button extends React.Component {
                 }
             }
         });
-        console.log('Sent up the random number to server!');
+        console.log('Sent up the message to server!');
     }
 
     render() {
