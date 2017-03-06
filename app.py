@@ -7,9 +7,9 @@ import models
 
 app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
-messages = []
+message_list = []
 user_list = []
-bot_img_url = ""
+bot_img_url = "https://robohash.org/robbie"
 
 
 @app.route('/')
@@ -19,29 +19,28 @@ def hello():
 @socketio.on('connect')
 def on_connect():
     print 'Someone connected!'
-    
-    messages.append({
+    message_list.append({
             'name': "Robbie",
             'picture': bot_img_url,
             'message': "Someone Connected!!",
         })
     
     socketio.emit('all messages', {
-        'messages': messages
+        'messages': message_list
     })
     
 
 @socketio.on('disconnect')
 def on_disconnect():
     print 'Someone disconnected!'
-    messages.append({
+    message_list.append({
             'name': "Robbie",
             'picture': bot_img_url,
             'message': "Someone Disconnected!!",
         })
     
     socketio.emit('all messages', {
-        'messages': messages
+        'messages': message_list
     })
 
 
@@ -51,8 +50,8 @@ def on_new_message(data):
         response= requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+data['facebook_user_token'])
         json= response.json()
         
-        print "Got an event for new number with data:", data
-        messages.append({
+        print "Got an event for new message with data:", data
+        message_list.append({
             'name': json['name'],
             'picture': json['picture']['data']['url'],
             'message':data['message'],
@@ -68,8 +67,8 @@ def on_new_message(data):
         response= requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='+data['google_user_token'])
         json= response.json()
         
-        print "Got an event for new number with data:", data
-        messages.append({
+        print "Got an event for new message with data:", data
+        message_list.append({
             'name': json['name'],
             'picture': json['picture'],
             'message':data['message'],
@@ -83,7 +82,7 @@ def on_new_message(data):
             
    
     socketio.emit('all messages', {
-        'messages': messages
+        'messages': message_list
     })
     
     socketio.emit('user list', {
