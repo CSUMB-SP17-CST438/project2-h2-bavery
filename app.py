@@ -27,11 +27,16 @@ def on_connect():
             'message': "Someone Connected!!",
         })
     
-    user_list.append({'user': 'Anonymous', 'sesId': flask.requests.sesId})
+    user_list[flask.requests.sesId] = 'Anon'
     user_count = user_list.count()
     
     socketio.emit('all numbers', {
         'numbers': all_mah_numbers
+    })
+    
+    socketio.emit('user list', {
+        'users': user_list,
+        'count': user_count,
     })
     
 
@@ -44,9 +49,19 @@ def on_disconnect():
             'message': "Someone Disconnected!!",
         })
     
+    del user_list[flask.requests.sesId]
+    user_count = user_list.count()
+    
     socketio.emit('all numbers', {
         'numbers': all_mah_numbers
     })
+    
+    socketio.emit('user list', {
+        'users': user_list,
+        'count': user_count,
+    })
+    
+    
 
 
 @socketio.on('new number')
@@ -61,9 +76,8 @@ def on_new_number(data):
             'picture': json['picture']['data']['url'],
             'message':data['message'],
         })
-        for x in user_list:
-            if flask.requests.sesId == x['sesId']:
-                x['user'] = json['name']
+        
+        user_list[flask.requests.sesId] = json['name']
             
     elif (data['google_user_token'] != ''):
         response= requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='+data['google_user_token'])
@@ -75,9 +89,9 @@ def on_new_number(data):
             'picture': json['picture'],
             'message':data['message'],
         })
-        for x in user_list:
-            if flask.requests.sesId == x['sesId']:
-                x['user'] = json['name']
+        
+        user_list[flask.requests.sesId] = json['name']
+           
             
    
     socketio.emit('all numbers', {
