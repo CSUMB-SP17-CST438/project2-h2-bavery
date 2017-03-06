@@ -7,9 +7,9 @@ import models
 
 app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
-all_mah_numbers = []
+messages = []
 user_list = []
-bot_img_url = "https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwj0r8_DjKPSAhXjrVQKHaNpDRMQjRwIBw&url=%2Furl%3Fsa%3Di%26rct%3Dj%26q%3D%26esrc%3Ds%26source%3Dimages%26cd%3D%26cad%3Drja%26uact%3D8%26ved%3D0ahUKEwj0r8_DjKPSAhXjrVQKHaNpDRMQjRwIBw%26url%3Dhttps%253A%252F%252Fplus.google.com%252F115511694512557777290%26psig%3DAFQjCNEiUuNGMK6fEgyLabfX9Pe5ZblB1A%26ust%3D1487832064882648&psig=AFQjCNEiUuNGMK6fEgyLabfX9Pe5ZblB1A&ust=1487832064882648"
+bot_img_url = ""
 
 
 @app.route('/')
@@ -20,39 +20,39 @@ def hello():
 def on_connect():
     print 'Someone connected!'
     
-    all_mah_numbers.append({
+    messages.append({
             'name': "Robbie",
             'picture': bot_img_url,
             'message': "Someone Connected!!",
         })
     
-    socketio.emit('all numbers', {
-        'numbers': all_mah_numbers
+    socketio.emit('all messages', {
+        'messages': messages
     })
     
 
 @socketio.on('disconnect')
 def on_disconnect():
     print 'Someone disconnected!'
-    all_mah_numbers.append({
+    messages.append({
             'name': "Robbie",
             'picture': bot_img_url,
             'message': "Someone Disconnected!!",
         })
     
-    socketio.emit('all numbers', {
-        'numbers': all_mah_numbers
+    socketio.emit('all messages', {
+        'messages': messages
     })
 
 
-@socketio.on('new number')
-def on_new_number(data):
+@socketio.on('new message')
+def on_new_message(data):
     if (data['facebook_user_token'] != ''):
         response= requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+data['facebook_user_token'])
         json= response.json()
         
         print "Got an event for new number with data:", data
-        all_mah_numbers.append({
+        messages.append({
             'name': json['name'],
             'picture': json['picture']['data']['url'],
             'message':data['message'],
@@ -69,7 +69,7 @@ def on_new_number(data):
         json= response.json()
         
         print "Got an event for new number with data:", data
-        all_mah_numbers.append({
+        messages.append({
             'name': json['name'],
             'picture': json['picture'],
             'message':data['message'],
@@ -82,8 +82,8 @@ def on_new_number(data):
             user_list.append({'user': json['name']})
             
    
-    socketio.emit('all numbers', {
-        'numbers': all_mah_numbers
+    socketio.emit('all messages', {
+        'messages': messages
     })
     
     socketio.emit('user list', {

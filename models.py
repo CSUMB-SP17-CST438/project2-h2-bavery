@@ -12,8 +12,10 @@ class Message(db.Model):
     user_name = db.Column(db.String(120))
     text = db.Column(db.String(120))
 
-def __init__ (self,t):
+def __init__ (self,t,ui,un):
     self.text=t
+    self.user_img=ui
+    self.user_name=un
     
 def __repr__ (self): # what's __repr__?
     return '<Message text: %s>' % self.text

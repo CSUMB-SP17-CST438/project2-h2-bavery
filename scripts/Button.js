@@ -10,7 +10,7 @@ export class Button extends React.Component {
         console.log('Post button clicked');
         FB.getLoginStatus((response) => {
             if (response.status == 'connected') {
-                Socket.emit('new number', {
+                Socket.emit('new message', {
                     'google_user_token': '',
                     'facebook_user_token':
                         response.authResponse.accessToken,
@@ -22,7 +22,7 @@ export class Button extends React.Component {
                 let auth = gapi.auth2.getAuthInstance();
                 let user = auth.currentUser.get();
                 if(user.isSignedIn()) {
-                    Socket.emit('new number', {
+                    Socket.emit('new message', {
                         'google_user_token':
                             user.getAuthResponse().id_token,
                         'facebook_user_token': '',
@@ -31,7 +31,7 @@ export class Button extends React.Component {
                 }
             }
         });
-        console.log('Sent up the random number to server!');
+        console.log('Sent up the message to server!');
     }
 
     render() {
