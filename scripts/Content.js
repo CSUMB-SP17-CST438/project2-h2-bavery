@@ -7,15 +7,15 @@ export class Content extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'messages': [],
+            'numbers': [],
             'users': []
             };
     }
 
     componentDidMount() {
-        Socket.on('all messages', (data) => {
+        Socket.on('all numbers', (data) => {
             this.setState({
-                'messages': data['messages'],
+                'numbers': data['numbers'],
             });
         })
         Socket.on('user list', (data) => {
@@ -26,9 +26,9 @@ export class Content extends React.Component {
     }
 
     render() {
-        let messages = this.state.messages.map(
+        let numbers = this.state.numbers.map(
             (n, index) => <li key= {index}>
-                <img src= {n.picture} alt="avatar" />
+                <img src= {n.picture} />
                 {n.name}: {n.message}
             </li>
         );
@@ -60,7 +60,7 @@ export class Content extends React.Component {
                     </div>
                     <div className="inputBox">
                         <div className="chatBox">
-                            <ul>{messages}</ul>
+                            <ul>{numbers}</ul>
                         </div>
                         <div className="input">
                             <Button />

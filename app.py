@@ -7,7 +7,7 @@ import models
 
 app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
-message_list = []
+all_mah_numbers = []
 user_list = []
 bot_img_url = "https://robohash.org/robbie"
 
@@ -19,39 +19,40 @@ def hello():
 @socketio.on('connect')
 def on_connect():
     print 'Someone connected!'
-    message_list.append({
+    
+    all_mah_numbers.append({
             'name': "Robbie",
             'picture': bot_img_url,
             'message': "Someone Connected!!",
         })
     
-    socketio.emit('all messages', {
-        'messages': message_list
+    socketio.emit('all numbers', {
+        'numbers': all_mah_numbers
     })
     
 
 @socketio.on('disconnect')
 def on_disconnect():
     print 'Someone disconnected!'
-    message_list.append({
+    all_mah_numbers.append({
             'name': "Robbie",
             'picture': bot_img_url,
             'message': "Someone Disconnected!!",
         })
     
-    socketio.emit('all messages', {
-        'messages': message_list
+    socketio.emit('all numbers', {
+        'numbers': all_mah_numbers
     })
 
 
-@socketio.on('new message')
-def on_new_message(data):
+@socketio.on('new number')
+def on_new_number(data):
     if (data['facebook_user_token'] != ''):
         response= requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+data['facebook_user_token'])
         json= response.json()
         
-        print "Got an event for new message with data:", data
-        message_list.append({
+        print "Got an event for new number with data:", data
+        all_mah_numbers.append({
             'name': json['name'],
             'picture': json['picture']['data']['url'],
             'message':data['message'],
@@ -67,8 +68,8 @@ def on_new_message(data):
         response= requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='+data['google_user_token'])
         json= response.json()
         
-        print "Got an event for new message with data:", data
-        message_list.append({
+        print "Got an event for new number with data:", data
+        all_mah_numbers.append({
             'name': json['name'],
             'picture': json['picture'],
             'message':data['message'],
@@ -81,8 +82,8 @@ def on_new_message(data):
             user_list.append({'user': json['name']})
             
    
-    socketio.emit('all messages', {
-        'messages': message_list
+    socketio.emit('all numbers', {
+        'numbers': all_mah_numbers
     })
     
     socketio.emit('user list', {
