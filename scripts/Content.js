@@ -8,8 +8,8 @@ export class Content extends React.Component {
         super(props);
         this.state = {
             'numbers': [],
-            'users list': [],
-            'user count': 0
+            'users_list': [],
+            'user_count': 0
             };
     }
 
@@ -21,12 +21,12 @@ export class Content extends React.Component {
         });
         Socket.on('user list', (data) => {
             this.setState({
-                'users list': data['users'],
+                'users_list': data['users'],
             });
         });
         Socket.on('user count', (data) => {
             this.setState({
-                'user count': data['count']
+                'user_count': data['count']
             });
         });
        
@@ -35,16 +35,16 @@ export class Content extends React.Component {
     render() {
         let numbers = this.state.numbers.map(
             (n, index) => <li key= {index}>
-                <img src= {n.picture} />
+                <img src= {n.picture} alt="Avatar" class="resize" />
                 {n.name}: {n.message}
             </li>
         );
         
-        var users_list = [];
-        for (var user in this.state['users list']) {
-            var item = <li key={user}>{user}</li>;
-            users_list.push(item);
-        }
+        let userList = this.state.user_list.map(
+            (i, index) => <li key= {index}>
+                {i.name}
+            </li>
+        );
         
         return (
             <div>
@@ -61,10 +61,10 @@ export class Content extends React.Component {
                     data-theme="dark">
                 </div>
                 <div className="container">
+                    <h4>Users: {this.state['user_count']}</h4>
                     <div className="userList">
-                        <h4>Users: {this.state['user_count']}</h4>
                         <div className="list">
-                            <ul>{users_list}</ul>
+                            <ul>{userList}</ul>
                         </div>
                     </div>
                     <div className="inputBox">

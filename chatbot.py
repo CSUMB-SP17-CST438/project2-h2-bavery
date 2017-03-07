@@ -6,7 +6,7 @@ def get_chatbot_response(message):
 
     points, command, args = message.split(' ', 2)
     if command == 'about':
-        return 'This is a chat room to discuss random things in a "spacey" environment.'
+        return 'This is a chat room to discuss random things in a spacey environment.'
     elif command == 'help':
         return 'Available commands: <br>  !! about ->  descriptions of the chat room <br>  !! help ->  lists available chatbot commands <br>  !! add <num> <num> ->  add two integers together <br>  !! divide <num> <num> ->  divide two integers <br>  !! say <text> -> the chatbot repeats the text input by the user  <br>  '
     elif command == 'add':
@@ -24,4 +24,3 @@ def get_chatbot_response(message):
         response= requests.get('https://www.cleverbot.com/getreply?key=' + os.getenv['cleverbot_api'] +'&input=' + args)
         json= response.json()
         
-        return 'I didn\'t recognize your command :-('

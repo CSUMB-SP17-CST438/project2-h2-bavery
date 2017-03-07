@@ -7,7 +7,7 @@ import chatbot
 app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
 all_mah_numbers = []
-user_list = {}
+user_list = []
 user_count = 0
 bot_img_url = "https://robohash.org/robbie"
 
@@ -26,7 +26,12 @@ def on_connect():
             'message': "Someone Connected!!",
         })
     
-    user_list[flask.request.sid] = "Anon"
+    contains = 0
+    for x in user_list:
+        if (x['sesId'] == flask.request.sid):
+            contains = 1
+    if (contains == 0):
+        user_list.append({'sesId': flask.request.sid, 'user': "Anon"})
     user_count = len(user_list)
     
     socketio.emit('all numbers', {
@@ -34,7 +39,7 @@ def on_connect():
     })
     
     socketio.emit('user list', {
-        'users': user_list.values()
+        'users': user_list
     })
     
     socketio.emit('user count', {
@@ -51,7 +56,12 @@ def on_disconnect():
             'message': "Someone Disconnected!!",
         })
     
-    del user_list[flask.request.sid]
+    new_user_list = []
+    for x in user_list:
+        if (x['sesId'] != flask.request.sid):
+            new_user_list.append({'sesId': x['sesId'], 'user': x['user']})
+    user_list = new_user_list
+    new_user_list = []
     user_count = len(user_list)
     
     socketio.emit('all numbers', {
@@ -59,7 +69,7 @@ def on_disconnect():
     })
     
     socketio.emit('user list', {
-        'users': user_list.values()
+        'users': user_list
     })
     
     socketio.emit('user count', {
@@ -82,7 +92,10 @@ def on_new_number(data):
             'message':data['message'],
         })
         
-        user_list[flask.request.sid] = json['name']
+        for x in user_list:
+            if (x['sesId'] == flask.request.sid):
+                x['user'] = json['name']
+                
             
     elif (data['google_user_token'] != ''):
         response= requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='+data['google_user_token'])
@@ -95,15 +108,20 @@ def on_new_number(data):
             'message':data['message'],
         })
         
-        user_list[flask.request.sid] = json['name']
+        for x in user_list:
+            if (x['sesId'] == flask.request.sid):
+                x['user'] = json['name']
    
     socketio.emit('all numbers', {
         'numbers': all_mah_numbers
     })
     
     socketio.emit('user list', {
-        'users': user_list,
-        'count': user_count,
+        'users': user_list
+    })
+    
+    socketio.emit('user count', {
+        'count': user_count
     })
 
 if __name__ == '__main__':
