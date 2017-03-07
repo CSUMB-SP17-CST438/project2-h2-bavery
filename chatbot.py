@@ -8,7 +8,7 @@ def get_chatbot_response(message):
     if command == 'about':
         return 'This is a chat room to discuss random things in a spacey environment.'
     elif command == 'help':
-        return 'Available commands: <br>  !! about ->  descriptions of the chat room <br>  !! help ->  lists available chatbot commands <br>  !! add <num> <num> ->  add two integers together <br>  !! divide <num> <num> ->  divide two integers <br>  !! say <text> -> the chatbot repeats the text input by the user  <br>  '
+        return 'Available commands: !! about ->  descriptions of the chat room !! help ->  lists available chatbot commands  !! add <num> <num> ->  add two integers together !! sub <num> <num> -> subtract two integers  !! divide <num> <num> ->  divide two integers  !! say <text> -> the chatbot repeats the text input by the user  !! <text> ->  chatbot will have a conversation with you '
     elif command == 'add':
         num1, num2 = args.split()
         return int(num1) + int(num2)

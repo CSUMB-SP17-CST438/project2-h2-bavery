@@ -98,7 +98,7 @@ def on_new_number(data):
             all_mah_numbers.append({
             'name': "Robbie",
             'picture': bot_img_url,
-            'message': r,
+            'message': str(r),
         })
                 
             
@@ -123,7 +123,7 @@ def on_new_number(data):
             all_mah_numbers.append({
             'name': "Robbie",
             'picture': bot_img_url,
-            'message': r,
+            'message': str(r),
         })
    
     socketio.emit('all numbers', {
