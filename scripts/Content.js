@@ -8,8 +8,8 @@ export class Content extends React.Component {
         super(props);
         this.state = {
             'numbers': [],
-            'users': [],
-            'user_count': 0
+            'users list': [],
+            'user count': 0
             };
     }
 
@@ -18,13 +18,17 @@ export class Content extends React.Component {
             this.setState({
                 'numbers': data['numbers'],
             });
-        })
+        });
         Socket.on('user list', (data) => {
             this.setState({
-                'users': data['users'],
-                'user_count': data['count'],
-            })
-        })
+                'users list': data['users'],
+            });
+        });
+        Socket.on('user count', (data) => {
+            this.setState({
+                'user count': data['count']
+            });
+        });
        
     }
 
@@ -35,11 +39,13 @@ export class Content extends React.Component {
                 {n.name}: {n.message}
             </li>
         );
-        let users = this.state.users.map(
-            (i, index) => <li key= {index}>
-                {i.user}
-            </li>
-        );
+        
+        var users_list = [];
+        for (var user of this.state['users list']) {
+            var item = <li key={user}>{user}</li>;
+            users_list.push(item);
+        }
+        
         return (
             <div>
                 <h1 className="heading">Random Chat!</h1>
@@ -56,9 +62,9 @@ export class Content extends React.Component {
                 </div>
                 <div className="container">
                     <div className="userList">
-                        <h4>Users:  {this.state.user_count}</h4>
+                        <h4>Users:  {this.state['user_count']}</h4>
                         <div className="list">
-                            <ul>{users}</ul>
+                            <ul>{users_list}</ul>
                         </div>
                     </div>
                     <div className="inputBox">
