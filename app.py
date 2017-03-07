@@ -26,7 +26,7 @@ def on_connect():
             'message': "Someone Connected!!",
         })
     
-    user_list[flask.request.sid] = 'Anon'
+    user_list[flask.request.sid] = "Anon"
     user_count = len(user_list)
     
     socketio.emit('all numbers', {

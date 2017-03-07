@@ -41,7 +41,7 @@ export class Content extends React.Component {
         );
         
         var users_list = [];
-        for (var user of this.state['users list']) {
+        for (var user in this.state['users list']) {
             var item = <li key={user}>{user}</li>;
             users_list.push(item);
         }
@@ -62,7 +62,7 @@ export class Content extends React.Component {
                 </div>
                 <div className="container">
                     <div className="userList">
-                        <h4>Users:  {this.state['user_count']}</h4>
+                        <h4>Users: {this.state['user_count']}</h4>
                         <div className="list">
                             <ul>{users_list}</ul>
                         </div>
