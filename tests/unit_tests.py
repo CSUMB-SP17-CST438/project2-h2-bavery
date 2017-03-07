@@ -8,7 +8,7 @@ class ChatBotResponseTest(unittest.TestCase):
     
     def test_help(self):
         r = chatbot.get_chatbot_response('!! help ')
-        self.assertEquals(r, 'Available commands: !! about ->  descriptions of the chat room !! help ->  lists available chatbot commands  !! add <num> <num> ->  add two integers together !! sub <num> <num> -> subtract two integers  !! divide <num> <num> ->  divide two integers  !! say <text> -> the chatbot repeats the text input by the user  !! <text> ->  chatbot will have a conversation with you  ')
+        self.assertEquals(r, 'Available commands: !! about ->  descriptions of the chat room !! help ->  lists available chatbot commands  !! add <num> <num> ->  add two integers together !! sub <num> <num> -> subtract two integers  !! divide <num> <num> ->  divide two integers  !! say <text> -> the chatbot repeats the text input by the user  !! <text> ->  chatbot will have a conversation with you ')
     
     def test_add(self):
         r = chatbot.get_chatbot_response('!! add 2 3 ')
