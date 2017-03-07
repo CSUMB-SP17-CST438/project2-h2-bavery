@@ -95,6 +95,15 @@ def on_new_number(data):
         for x in user_list:
             if (x['sesId'] == flask.request.sid):
                 x['user'] = json['name']
+        
+        r = chatbot.get_chatbot_response(data['message'])
+        
+        if (r != ''):
+            all_mah_numbers.append({
+            'name': "Robbie",
+            'picture': bot_img_url,
+            'message': r,
+        })
                 
             
     elif (data['google_user_token'] != ''):
@@ -111,6 +120,15 @@ def on_new_number(data):
         for x in user_list:
             if (x['sesId'] == flask.request.sid):
                 x['user'] = json['name']
+                
+        r = chatbot.get_chatbot_response(data['message'])
+        
+        if (r != ''):
+            all_mah_numbers.append({
+            'name': "Robbie",
+            'picture': bot_img_url,
+            'message': r,
+        })
    
     socketio.emit('all numbers', {
         'numbers': all_mah_numbers

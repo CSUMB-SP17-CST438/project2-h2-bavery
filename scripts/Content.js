@@ -61,7 +61,7 @@ export class Content extends React.Component {
                     data-theme="dark">
                 </div>
                 <div className="container">
-                    <h4>Users: {this.state['user_count']}</h4>
+                    <h4>Users: {this.state.user_count}</h4>
                     <div className="userList">
                         <div className="list">
                             <ul>{userList}</ul>

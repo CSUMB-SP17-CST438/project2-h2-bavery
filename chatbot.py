@@ -23,4 +23,5 @@ def get_chatbot_response(message):
     else:
         response= requests.get('https://www.cleverbot.com/getreply?key=' + os.getenv['cleverbot_api'] +'&input=' + args)
         json= response.json()
+        return json['output']
         
