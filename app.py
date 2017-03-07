@@ -34,8 +34,11 @@ def on_connect():
     })
     
     socketio.emit('user list', {
-        'users': user_list,
-        'count': user_count,
+        'users': user_list.values()
+    })
+    
+    socketio.emit('user count', {
+        'count': user_count
     })
     
 
@@ -56,8 +59,11 @@ def on_disconnect():
     })
     
     socketio.emit('user list', {
-        'users': user_list,
-        'count': user_count,
+        'users': user_list.values()
+    })
+    
+    socketio.emit('user count', {
+        'count': user_count
     })
     
     
