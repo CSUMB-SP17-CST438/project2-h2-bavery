@@ -56,12 +56,8 @@ def on_disconnect():
             'message': "Someone Disconnected!!",
         })
     
-    new_user_list = []
-    for x in user_list:
-        if (x['sesId'] != flask.request.sid):
-            new_user_list.append({'sesId': x['sesId'], 'user': x['user']})
-    user_list = new_user_list
-    new_user_list = []
+    
+    user_list[:] = [d for d in user_list if d.get('sesId') != flask.request.sid]
     user_count = len(user_list)
     
     socketio.emit('all numbers', {
