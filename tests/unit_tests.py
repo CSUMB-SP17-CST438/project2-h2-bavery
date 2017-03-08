@@ -14,7 +14,7 @@ class ChatBotResponseTest(unittest.TestCase):
         r = chatbot.get_chatbot_response('!! add 2 3 ')
         self.assertEquals(r, 5)
         
-    def test_add(self):
+    def test_another_add(self):
         r = chatbot.get_chatbot_response('!! add 4 6 ')
         self.assertEquals(r, 10)
     
@@ -22,7 +22,7 @@ class ChatBotResponseTest(unittest.TestCase):
         r = chatbot.get_chatbot_response('!! divide 4 2 ')
         self.assertEquals(r, 2)
         
-    def test_divide(self):
+    def test_another_divide(self):
         r = chatbot.get_chatbot_response('!! divide 8 2 ')
         self.assertEquals(r, 4)
         
@@ -30,7 +30,7 @@ class ChatBotResponseTest(unittest.TestCase):
         r = chatbot.get_chatbot_response('!! sub 5 2 ')
         self.assertEquals(r, 3)
         
-    def test_sub(self):
+    def test_another_sub(self):
         r = chatbot.get_chatbot_response('!! sub 10 5 ')
         self.assertEquals(r, 5)
         
